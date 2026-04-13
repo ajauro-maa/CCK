@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Col&eacute;gio Crist&atilde;o Kair&oacute;s</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --laranja: #ea5818;
+      --verde-escuro: #004213;
+      --verde: #099e39;
+      --amarelo: #fac312;
+      --roxo: #502c86;
+      --azul: #1b2b5e;
+      --cinza: #f7f7f5;
+      --branco: #ffffff;
+    }
+    body { font-family: 'Sora', sans-serif; color: #1b2b5e; }
+    .site-wrapper { width: 100%; overflow: hidden; }
+
+    nav {
+      background: var(--verde-escuro);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 72px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img {
+      height: 75px;
+      width: auto;
+      object-fit: contain;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--amarelo); }
+    .nav-cta { background: var(--laranja); color: white; border: none; padding: 10px 22px; border-radius: 50px; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.88; }
+
+    .hero {
+      background: var(--laranja);
+      min-height: 540px; padding: 80px 40px;
+      display: flex; align-items: center;
+      gap: 40px; position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: 'K'; font-family: 'Sora', sans-serif; font-weight: 700;
+      font-size: 1000px; color: rgba(255,255,255,0.07);
+      position: absolute; right: -60px; top: -120px; line-height: 1; pointer-events: none;
+    }
+    .hero-content { max-width: 560px; z-index: 1; }
+    .hero-badge { background: rgba(255,255,255,0.2); color: white; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; display: inline-block; margin-bottom: 20px; }
+    .hero h1 { font-size: 46px; font-weight: 700; color: white; line-height: 1.15; margin-bottom: 18px; }
+    .hero h1 span { color: var(--amarelo); }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 32px; font-weight: 300; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--verde-escuro); color: white; border: none; padding: 14px 28px; border-radius: 50px; font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.6); padding: 14px 28px; border-radius: 50px; font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+    .hero-stats { display: flex; gap: 32px; margin-top: 40px; }
+    .hero-stat strong { display: block; font-size: 28px; font-weight: 700; color: white; }
+    .hero-stat span { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 300; }
+
+    section { padding: 80px 40px; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--laranja); margin-bottom: 10px; }
+    .section-title { font-size: 34px; font-weight: 700; color: var(--azul); margin-bottom: 14px; line-height: 1.2; }
+    .section-sub { font-size: 16px; color: #555; font-weight: 300; line-height: 1.7; max-width: 560px; margin-bottom: 48px; }
+
+    .sobre { background: var(--cinza); }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .sobre-values { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .value-card { background: white; border-radius: 12px; padding: 20px; border-left: 4px solid var(--laranja); }
+    .value-card.verde { border-left-color: var(--verde); }
+    .value-card.roxo { border-left-color: var(--roxo); }
+    .value-card.amarelo { border-left-color: var(--amarelo); }
+    .value-card h4 { font-size: 14px; font-weight: 600; color: var(--azul); margin-bottom: 6px; }
+    .value-card p { font-size: 13px; color: #666; font-weight: 300; line-height: 1.6; }
+    .sobre-visual { background: var(--verde-escuro); border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 20px; }
+    .proposito { background: var(--laranja); border-radius: 12px; padding: 24px; }
+    .proposito h3 { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .proposito p { font-size: 20px; font-weight: 700; color: white; line-height: 1.4; }
+    .missao-row { display: flex; gap: 14px; }
+    .missao-item { flex: 1; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; }
+    .missao-item h4 { font-size: 12px; font-weight: 600; color: var(--amarelo); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .missao-item p { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 300; line-height: 1.5; }
+
+    .niveis { background: white; }
+    .niveis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .nivel-card { border-radius: 16px; overflow: hidden; }
+    .nivel-header { padding: 28px 24px 20px; }
+    .nivel-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px; }
+    .nivel-card.bercario .nivel-header { background: var(--amarelo); }
+    .nivel-card.infantil .nivel-header { background: var(--verde); }
+    .nivel-card.fundamental .nivel-header { background: var(--laranja); }
+    .nivel-card.medio .nivel-header { background: var(--azul); }
+    .nivel-header h3 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .nivel-header span { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 300; }
+    .nivel-body { background: var(--cinza); padding: 20px 24px; }
+    .nivel-body ul { list-style: none; }
+    .nivel-body li { font-size: 13px; color: #555; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 300; display: flex; align-items: center; gap: 8px; }
+    .nivel-body li:last-child { border-bottom: none; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--laranja); flex-shrink: 0; }
+
+    .estrutura { background: var(--azul); }
+    .estrutura .section-title { color: white; }
+    .estrutura .section-label { color: var(--amarelo); }
+    .estrutura .section-sub { color: rgba(255,255,255,0.7); }
+    .estrutura-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .estr-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 28px; transition: background 0.2s; }
+    .estr-card:hover { background: rgba(255,255,255,0.14); }
+    .estr-icon { font-size: 28px; margin-bottom: 14px; }
+    .estr-card h3 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .estr-card p { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.6; }
+
+    .noticias { background: var(--cinza); }
+    .noticias-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .noticia-card { background: white; border-radius: 16px; overflow: hidden; }
+    .noticia-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .noticia-img.laranja { background: var(--laranja); }
+    .noticia-img.verde { background: var(--verde); }
+    .noticia-img.azul { background: var(--azul); }
+    .noticia-body { padding: 22px; }
+    .noticia-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--laranja); margin-bottom: 8px; }
+    .noticia-body h3 { font-size: 15px; font-weight: 600; color: var(--azul); margin-bottom: 8px; line-height: 1.4; }
+    .noticia-body p { font-size: 13px; color: #777; font-weight: 300; line-height: 1.6; }
+    .noticia-meta { font-size: 12px; color: #aaa; margin-top: 14px; }
+
+    .galeria { background: white; }
+    .galeria-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .gal-item { border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .gal-item.large { grid-column: span 2; grid-row: span 2; min-height: 260px; }
+    .gal-item.tall { grid-row: span 2; min-height: 260px; }
+    .gal-item.normal { min-height: 120px; }
+    .gal-laranja { background: var(--laranja); }
+    .gal-verde { background: var(--verde); }
+    .gal-azul { background: var(--azul); }
+    .gal-amarelo { background: var(--amarelo); }
+    .gal-roxo { background: var(--roxo); }
+    .gal-label { background: rgba(0,0,0,0.35); color: white; font-size: 12px; font-weight: 600; width: 100%; height: 100%; min-height: inherit; display: flex; align-items: center; justify-content: center; letter-spacing: 0.04em; text-align: center; padding: 12px; }
+
+    .matricula { background: var(--laranja); }
+    .matricula-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .matricula .section-title { color: white; }
+    .matricula .section-label { color: rgba(255,255,255,0.7); }
+    .matricula .section-sub { color: rgba(255,255,255,0.85); }
+    .mat-form { background: white; border-radius: 20px; padding: 36px; }
+    .mat-form h3 { font-size: 18px; font-weight: 700; color: var(--azul); margin-bottom: 22px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-group label { font-size: 12px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
+    .form-group input, .form-group select, .form-group textarea {
+      font-family: 'Sora', sans-serif; font-size: 14px; color: var(--azul);
+      border: 1.5px solid #e0e0e0; border-radius: 10px; padding: 12px 14px; outline: none; background: var(--cinza);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--laranja); }
+    .form-group textarea { resize: none; height: 90px; }
+    .btn-submit { width: 100%; background: var(--laranja); color: white; border: none; padding: 15px; border-radius: 10px; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .btn-submit:hover { opacity: 0.88; }
+    .unidades { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+    .unidade-item { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 20px; display: flex; gap: 14px; align-items: center; }
+    .unidade-pin { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .unidade-info strong { display: block; font-size: 13px; font-weight: 600; color: white; }
+    .unidade-info span { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 300; }
+
+    footer { background: var(--verde-escuro); padding: 48px 40px 28px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .footer-brand img {
+      height: 75px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.7; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amarelo); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .social-links { display: flex; gap: 10px; }
+    .social-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; text-decoration: none; transition: background 0.2s; }
+    .social-btn:hover { background: rgba(255,255,255,0.2); }
+
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      height: auto;
+      padding: 20px;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 70px;
+    }
+    .nav-links {
+      flex-direction: row;
+      gap: 12px;
+      text-align: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-size: 16px;
+    }
+    .nav-cta {
+      width: 100%;
+      max-width: 300px;
+    }
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 36px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 16px;
+    }
+    .hero-btns {
+      flex-direction: column;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn-primary, .btn-outline {
+      width: 100%;
+      max-width: 280px;
+    }
+    .hero-stats {
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    section {
+      padding: 60px 20px;
+    }
+    .section-title {
+      font-size: 28px;
+    }
+    .sobre-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .sobre-values {
+      grid-template-columns: 1fr 1fr;
+    }
+    .missao-row {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .niveis-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .estrutura-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .noticias-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .galeria-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .gal-item.large {
+      grid-column: span 1;
+      grid-row: span 1;
+      min-height: 200px;
+    }
+    .gal-item.tall {
+      grid-row: span 1;
+      min-height: 200px;
+    }
+    .matricula-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+  }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+
+  <nav>
+    <div class="nav-logo">
+      <img src="KAIROS_-_NOVO_LOGOTIPO_BRANCO-02.png" alt="Colégio Cristão Kairós" />
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="document.getElementById('sobre').scrollIntoView({behavior:'smooth'})">Sobre o Col&eacute;gio</a></li>
+      <li><a onclick="document.getElementById('niveis').scrollIntoView({behavior:'smooth'})">N&iacute;veis de Ensino</a></li>
+      <li><a onclick="document.getElementById('estrutura').scrollIntoView({behavior:'smooth'})">Estrutura</a></li> 
+      <li><a onclick="document.getElementById('noticias').scrollIntoView({behavior:'smooth'})">Not&iacute;cias</a></li>
+      <li><a onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})">Galeria</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('matricula').scrollIntoView({behavior:'smooth'})">Fa&ccedil;a sua Matr&iacute;cula</button>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Educa&ccedil;&atilde;o Crist&atilde; de Excel&ecirc;ncia</div>
+      <h1>Educamos para a <span>vida</span><br>com prop&oacute;sito e f&eacute;</h1>
+      <p>No Kair&oacute;s, integramos f&eacute; e conhecimento cultivando uma gera&ccedil;&atilde;o que cresce com sabedoria, prop&oacute;sito e dire&ccedil;&atilde;o.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('matricula').scrollIntoView({behavior:'smooth'})">Matricule-se agora</button>
+        <button class="btn-outline" onclick="document.getElementById('sobre').scrollIntoView({behavior:'smooth'})">Conhe&ccedil;a o Kair&oacute;s</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>+10</strong><span>Anos de hist&oacute;ria</span></div>
+        <div class="hero-stat"><strong>4</strong><span>Unidades</span></div>
+        <div class="hero-stat"><strong>1500+</strong><span>Alunos formados</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="sobre" id="sobre">
+    <div class="sobre-grid">
+      <div>
+        <div class="section-label">Quem somos</div>
+        <h2 class="section-title">Mais do que ensinar,<br>formamos pessoas</h2>
+        <p class="section-sub">Atrav&eacute;s da educa&ccedil;&atilde;o por princ&iacute;pios, o Kair&oacute;s integra f&eacute; e conhecimento, cultivando uma gera&ccedil;&atilde;o que cresce com sabedoria, prop&oacute;sito e dire&ccedil;&atilde;o.</p>
+        <div class="sobre-values">
+          <div class="value-card"><h4>Laranja &mdash; Energia</h4><p>Entusiasmo, criatividade e alegria de aprender todos os dias.</p></div>
+          <div class="value-card verde"><h4>Verde &mdash; Crescimento</h4><p>Desenvolvimento integral fundamentado na Palavra de Deus.</p></div>
+          <div class="value-card amarelo"><h4>Amarelo &mdash; Sabedoria</h4><p>A luz do conhecimento que ilumina e transforma vidas.</p></div>
+          <div class="value-card roxo"><h4>Roxo &mdash; Prop&oacute;sito</h4><p>F&eacute; e identidade crist&atilde; como base de toda forma&ccedil;&atilde;o.</p></div>
+        </div>
+      </div>
+      <div class="sobre-visual">
+        <div class="proposito">
+          <h3>Nosso prop&oacute;sito</h3>
+          <p>&ldquo;Educar para a vida &eacute; o nosso prop&oacute;sito!&rdquo;</p>
+        </div>
+        <div class="missao-row">
+          <div class="missao-item"><h4>Miss&atilde;o</h4><p>Formar pessoas &iacute;ntegras com excel&ecirc;ncia acad&ecirc;mica e valores crist&atilde;os.</p></div>
+          <div class="missao-item"><h4>Vis&atilde;o</h4><p>Ser refer&ecirc;ncia em educa&ccedil;&atilde;o crist&atilde; integral no Brasil.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="niveis" id="niveis">
+    <div class="section-label">Etapas de forma&ccedil;&atilde;o</div>
+    <h2 class="section-title">N&iacute;veis de Ensino</h2>
+    <p class="section-sub">Do ber&ccedil;&aacute;rio ao ensino m&eacute;dio, oferecemos uma educa&ccedil;&atilde;o completa, integrada e alinhada com os valores crist&atilde;os.</p>
+    <div class="niveis-grid">
+      <div class="nivel-card bercario">
+        <div class="nivel-header">
+          <div class="nivel-icon">&#127807;</div>
+          <h3>Ber&ccedil;&aacute;rio</h3><span>0 a 1 ano e 11 meses</span>
+        </div>
+        <div class="nivel-body"><ul>
+          <li><span class="dot"></span>Estimula&ccedil;&atilde;o precoce</li>
+          <li><span class="dot"></span>Desenvolvimento sensorial</li>
+          <li><span class="dot"></span>Rotinas com amor e cuidado</li>
+          <li><span class="dot"></span>Primeiros valores crist&atilde;os</li>
+        </ul></div>
+      </div>
+      <div class="nivel-card infantil">
+        <div class="nivel-header">
+          <div class="nivel-icon">&#127803;</div>
+          <h3>Ed. Infantil</h3><span>2 a 5 anos</span>
+        </div>
+        <div class="nivel-body"><ul>
+          <li><span class="dot"></span>Aprendizado l&uacute;dico</li>
+          <li><span class="dot"></span>Ingl&ecirc;s desde cedo</li>
+          <li><span class="dot"></span>Musicaliza&ccedil;&atilde;o</li>
+          <li><span class="dot"></span>Fundamentos da f&eacute;</li>
+        </ul></div>
+      </div>
+      <div class="nivel-card fundamental">
+        <div class="nivel-header">
+          <div class="nivel-icon">&#128218;</div>
+          <h3>Fundamental</h3><span>6 a 14 anos</span>
+        </div>
+        <div class="nivel-body"><ul>
+          <li><span class="dot"></span>Base acad&ecirc;mica s&oacute;lida</li>
+          <li><span class="dot"></span>Pensamento cr&iacute;tico</li>
+          <li><span class="dot"></span>Projetos interdisciplinares</li>
+          <li><span class="dot"></span>Forma&ccedil;&atilde;o de car&aacute;ter</li>
+        </ul></div>
+      </div>
+      <div class="nivel-card medio">
+        <div class="nivel-header">
+          <div class="nivel-icon">&#127891;</div>
+          <h3>Ensino M&eacute;dio</h3><span>15 a 17 anos</span>
+        </div>
+        <div class="nivel-body"><ul>
+          <li><span class="dot"></span>Prepara&ccedil;&atilde;o para o ENEM</li>
+          <li><span class="dot"></span>Lideran&ccedil;a e protagonismo</li>
+          <li><span class="dot"></span>Orienta&ccedil;&atilde;o vocacional</li>
+          <li><span class="dot"></span>Projeto de vida crist&atilde;o</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="estrutura" id="estrutura">
+    <div class="section-label">Nossas instala&ccedil;&otilde;es</div>
+    <h2 class="section-title">Uma estrutura pensada para voc&ecirc;</h2>
+    <p class="section-sub">Espa&ccedil;os modernos, seguros e inspiradores que potencializam o aprendizado e o desenvolvimento integral dos nossos alunos.</p>
+    <div class="estrutura-grid">
+      <div class="estr-card"><div class="estr-icon">&#127967;</div><h3>Quadras esportivas</h3><p>Espa&ccedil;os para desenvolvimento f&iacute;sico, trabalho em equipe e forma&ccedil;&atilde;o de valores atrav&eacute;s do esporte.</p></div>
+      <div class="estr-card"><div class="estr-icon">&#128300;</div><h3>Laborat&oacute;rios</h3><p>Laborat&oacute;rios de ci&ecirc;ncias e tecnologia equipados para aulas pr&aacute;ticas e experimentos inovadores.</p></div>
+      <div class="estr-card"><div class="estr-icon">&#128214;</div><h3>Biblioteca</h3><p>Acervo amplo com livros crist&atilde;os, did&aacute;ticos e liter&aacute;rios, incentivando o amor pela leitura.</p></div>
+      <div class="estr-card"><div class="estr-icon">&#127917;</div><h3>Audit&oacute;rio</h3><p>Espa&ccedil;o para eventos, cultos escolares, apresenta&ccedil;&otilde;es e celebra&ccedil;&otilde;es da comunidade Kair&oacute;s.</p></div>
+      <div class="estr-card"><div class="estr-icon">&#128187;</div><h3>Salas de tecnologia</h3><p>Computadores modernos e ferramentas digitais para preparar os alunos para o futuro.</p></div>
+      <div class="estr-card"><div class="estr-icon">&#127859;</div><h3>Refeit&oacute;rio</h3><p>Alimenta&ccedil;&atilde;o balanceada e nutritiva, preparada com cuidado para garantir sa&uacute;de e energia.</p></div>
+    </div>
+  </section>
+
+  <section class="noticias" id="noticias">
+    <div class="section-label">Fique por dentro</div>
+    <h2 class="section-title">Not&iacute;cias e Eventos</h2>
+    <p class="section-sub">Acompanhe as novidades, eventos e conquistas da fam&iacute;lia Kair&oacute;s.</p>
+    <div class="noticias-grid">
+      <div class="noticia-card">
+        <div class="noticia-img laranja">&#127942;</div>
+        <div class="noticia-body">
+          <div class="noticia-tag">Destaque</div>
+          <h3>Alunos do Kair&oacute;s conquistam pr&ecirc;mio nacional de ci&ecirc;ncias</h3>
+          <p>Projeto de alunos do fundamental II representa o col&eacute;gio em olimp&iacute;ada nacional com excelentes resultados.</p>
+          <div class="noticia-meta">15 de mar&ccedil;o de 2026</div>
+        </div>
+      </div>
+      <div class="noticia-card">
+        <div class="noticia-img verde">&#127881;</div>
+        <div class="noticia-body">
+          <div class="noticia-tag">Eventos</div>
+          <h3>Festa das Fam&iacute;lias 2026 &mdash; Uma celebra&ccedil;&atilde;o inesquec&iacute;vel</h3>
+          <p>A tradicional Festa das Fam&iacute;lias reuniu centenas de fam&iacute;lias em um dia de celebra&ccedil;&atilde;o, louvor e comunh&atilde;o.</p>
+          <div class="noticia-meta">02 de mar&ccedil;o de 2026</div>
+        </div>
+      </div>
+      <div class="noticia-card">
+        <div class="noticia-img azul">&#128226;</div>
+        <div class="noticia-body">
+          <div class="noticia-tag">Matr&iacute;culas</div>
+          <h3>Matr&iacute;culas abertas para 2026 &mdash; Garanta sua vaga!</h3>
+          <p>As matr&iacute;culas para 2026 est&atilde;o abertas. Vagas limitadas em todas as unidades e segmentos.</p>
+          <div class="noticia-meta">20 de fevereiro de 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="galeria" id="galeria">
+    <div class="section-label">Nosso espa&ccedil;o</div>
+    <h2 class="section-title">Galeria de Fotos</h2>
+    <p class="section-sub">Um olhar para dentro da nossa comunidade, estrutura e momentos especiais.</p>
+    <div class="galeria-grid">
+      <div class="gal-item large gal-laranja"><div class="gal-label">Fachada e entrada principal</div></div>
+      <div class="gal-item normal gal-verde"><div class="gal-label">P&aacute;tio e &aacute;rea verde</div></div>
+      <div class="gal-item normal gal-amarelo"><div class="gal-label">Sala de aula</div></div>
+      <div class="gal-item tall gal-roxo"><div class="gal-label">Quadra esportiva</div></div>
+      <div class="gal-item normal gal-azul"><div class="gal-label">Laborat&oacute;rio</div></div>
+      <div class="gal-item normal gal-laranja"><div class="gal-label">Biblioteca</div></div>
+    </div>
+  </section>
+
+  <section class="matricula" id="matricula">
+    <div class="matricula-inner">
+      <div>
+        <div class="section-label">Fa&ccedil;a parte da fam&iacute;lia Kair&oacute;s</div>
+        <h2 class="section-title">Agende uma visita ou solicite sua matr&iacute;cula</h2>
+        <p class="section-sub">Entre em contato conosco e venha conhecer pessoalmente a estrutura e o ambiente acolhedor do Col&eacute;gio Kair&oacute;s.</p>
+        <div class="unidades">
+          <div class="unidade-item"><div class="unidade-pin">&#128205;</div><div class="unidade-info"><strong>Unidade 1 &mdash; Santa Helena, Suzano</strong><span>Rua Nova do Julho, 864 &mdash; CEP 08674-230</span></div></div>
+          <div class="unidade-item"><div class="unidade-pin">&#128205;</div><div class="unidade-info"><strong>Unidade 2 &mdash; Santa Helena, Suzano</strong><span>Rua Almirante Gago Coutinho, 54</span></div></div>
+          <div class="unidade-item"><div class="unidade-pin">&#128205;</div><div class="unidade-info"><strong>Unidade 3 &mdash; Barueri</strong><span>Av. Aruanã, 70 &mdash; Tamboé &mdash; CEP 06460-010</span></div></div>
+          <div class="unidade-item"><div class="unidade-pin">&#128205;</div><div class="unidade-info"><strong>Unidade 4 &mdash; Mogi das Cruzes</strong><span>Av. Pedro Machado, 203 &mdash; CEP 08717-720</span></div></div>
+        </div>
+      </div>
+      <div class="mat-form">
+        <h3>Solicitar informa&ccedil;&otilde;es</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Nome do respons&aacute;vel</label><input type="text" placeholder="Seu nome completo" /></div>
+          <div class="form-group"><label>Telefone / WhatsApp</label><input type="text" placeholder="(11) 99999-9999" /></div>
+        </div>
+        <div class="form-group"><label>E-mail</label><input type="email" placeholder="seuemail@exemplo.com" /></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>N&iacute;vel de interesse</label>
+            <select><option>Ber&ccedil;&aacute;rio</option><option>Ed. Infantil</option><option>Fundamental I</option><option>Fundamental II</option><option>Ensino M&eacute;dio</option></select>
+          </div>
+          <div class="form-group">
+            <label>Unidade</label>
+            <select><option>Suzano &mdash; Unidade 1</option><option>Suzano &mdash; Unidade 2</option><option>Barueri</option><option>Mogi das Cruzes</option></select>
+          </div>
+        </div>
+        <div class="form-group"><label>Mensagem</label><textarea placeholder="Deixe sua mensagem ou d&uacute;vida..."></textarea></div>
+        <button class="btn-submit">Enviar solicita&ccedil;&atilde;o &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="KAIROS_-_NOVO_LOGOTIPO_BRANCO-02.png" alt="Kairós" class="logo-footer" />
+        <p>Educando com fé, excelência e propósito desde 2014. Formamos pessoas íntegras para transformar o mundo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Col&eacute;gio</h4>
+        <ul>
+          <li><a href="#">Sobre o Kair&oacute;s</a></li>
+          <li><a href="#">Nossa hist&oacute;ria</a></li>
+          <li><a href="#">Miss&atilde;o e valores</a></li>
+          <li><a href="#">Corpo docente</a></li>
+          <li><a href="#">Parceiros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Ensino</h4>
+        <ul>
+          <li><a href="#">Ber&ccedil;&aacute;rio</a></li>
+          <li><a href="#">Ed. Infantil</a></li>
+          <li><a href="#">Fundamental</a></li>
+          <li><a href="#">Ensino M&eacute;dio</a></li>
+          <li><a href="#">Atividades extras</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="#">Matr&iacute;culas 2026</a></li>
+          <li><a href="#">Fale conosco</a></li>
+          <li><a href="#">Portal do aluno</a></li>
+          <li><a href="#">Trabalhe conosco</a></li>
+          <li><a href="#">Imprensa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Col&eacute;gio Crist&atilde;o Kair&oacute;s. Todos os direitos reservados.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#">f</a>
+        <a class="social-btn" href="#">in</a>
+        <a class="social-btn" href="#">yt</a>
+        <a class="social-btn" href="#">ig</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
